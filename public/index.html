@@ -20,6 +20,10 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
+    <script src="https://www.gstatic.com/firebasejs/9.1.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.1/firebase-database.js"></script>
+
+
 </head>
 
 <body id="page-top">
@@ -140,13 +144,6 @@
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
-            <!-- Sidebar Message -->
-            <div class="sidebar-card d-none d-lg-flex">
-                <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
-                <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
-                <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
             </div>
 
         </ul>
@@ -290,9 +287,47 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
                 <!-- /.container-fluid -->
+
+                <div id="modules-container"></div>
+                
+
+                <script>
+                    const modulesContainer = document.querySelector('#modules-container');
+
+                    // Read the module data from the database
+                    const modulesRef = firebase.database.ref('modules');
+                    modulesRef.on('value', (snapshot) => {
+                    modulesContainer.innerHTML = ''; // clear the container
+                    snapshot.forEach((childSnapshot) => {
+                        const moduleData = childSnapshot.val();
+                        const moduleName = moduleData.name;
+                        const moduleCode = moduleData.code;
+                        const moduleElement = document.createElement('div');
+                        moduleElement.innerHTML = `
+                            <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">${moduleName}</div>
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col-auto">
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">${moduleCode}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            `;
+                            modulesContainer.appendChild(moduleElement);
+                        });
+                    });
+
+                </script>
 
             </div>
             <!-- End of Main Content -->
@@ -357,4 +392,4 @@
 
 </body>
 
-</html>
+</html>vb
