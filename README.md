@@ -8,4 +8,4 @@ The student can click the button to add modules where they will be prompted to i
 
 In the side panel, there is a chart page that displays a bar chart with the average marks for each module. There is also an exercises page that contains exercises for different courses and topics.
 
-Web App URL: https://grades-tracker-f44b6--grades-tracker-bf8zf4da.web.app/
+Web App URL: https://grades-tracker-f44b6--grades-tracker-214143-t5g5w7gg.web.app
