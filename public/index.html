@@ -367,13 +367,45 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                        <h1 class="h3 mb-0 text-gray-800">Overview</h1>
+
+                        <div class="card-footer">
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#addModuleModal">Add Module</button>
+                        </div>
+                    
+                        <div class="modal fade" id="addModuleModal" tabindex="-1" role="dialog" aria-labelledby="addModuleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="addModuleModalLabel">Add Module</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- Add Module form -->
+                                        <form id="addModuleForm">
+                                            <div class="form-group">
+                                                <label for="ModuleName">Module Name</label>
+                                                <input type="text" class="form-control" id="ModuleName" placeholder="Enter Module name">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="ModuleCode">Module Code</label>
+                                                <input type="text" class="form-control" id="ModuleCode" placeholder="Enter Module Code">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary" onclick="addModule()">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Content Row -->
-                    <div class="row">
+                    <div class="row" id="moduleList">
 
                         <!-- Security Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
@@ -446,8 +478,8 @@
                         </div>
 
 
-                          <!-- Software Engineering Card -->
-                          <div class="col-xl-3 col-md-6 mb-4">
+                        <!-- Software Engineering Card -->
+                        <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-success shadow h-100 py-2">
                               <div class="card-body">
                                 <div class="row no-gutters align-items-center">
@@ -477,8 +509,8 @@
                                 </div>
                               </div>
                             </div>
-                          </div>
-                        
+                        </div>
+
                         <!-- Intermediate Mathematics Card -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-info shadow h-100 py-2">
@@ -510,7 +542,7 @@
                                 </div>
                               </div>
                             </div>
-                          </div>
+                        </div>
 
                         <!-- Logic Card -->
                         <div class="col-xl-3 col-md-6 mb-4">
@@ -543,7 +575,7 @@
                                 </div>
                               </div>
                             </div>
-                          </div>
+                        </div>
 
                     <!-- Content Row -->
 
@@ -847,7 +879,8 @@
             var courseworkMarks = $('#courseworkMarks').val();
 
             // Add the coursework details to the card
-            var courseworkDetails = '<div class="coursework-item">' +
+            var courseworkDetails = 
+            '<div class="coursework-item">' +
             '<div class="d-flex justify-content-between">' +
             '<div>' + courseworkName + '</div>' +
             '<div>' + courseworkMarks + '%</div>' +
@@ -864,6 +897,42 @@
 
 
     </script>
+
+<script>
+    function addModule() {
+        // Get the values from the input fields
+        var moduleName = $('#moduleName').val();
+        var moduleCode = $('#moduleCode').val();
+
+        // Add the module details to the card
+        var moduleDetails = 
+        '<div class="col-xl-3 col-md-6 mb-4">' +
+            '<div class="card border-left-primary shadow h-100 py-2">'+
+                '<div class="card-body">'+
+                    '<div class="row no-gutters align-items-center">'+
+                        '<div class="col mr-2">'+
+                            '<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">'+
+                                moduleName+
+                            '</div>'+
+                            '<div class="h5 mb-0 font-weight-bold text-gray-800">'+
+                                moduleCode+
+                            '</div>'+
+                        '</div>'+
+                    '</div>'+
+                '</div>'+
+                '<div class="card-footer">'+
+                    '<button class="btn btn-primary" data-toggle="modal" data-target="#addCourseworkModal">Add Coursework</button>'+
+                '</div>'+
+            '</div>'+
+        '</div>';
+
+        $('#moduleList').prepend(moduleDetails);
+
+        // Hide the modal
+        $('#addModuleModal').modal('hide');
+    }
+
+</script>
   
 </body>
 
